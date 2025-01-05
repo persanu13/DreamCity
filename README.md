@@ -1,5 +1,6 @@
-## Next.js App Router Course - Starter
+## Dream City is a project about Brasov City
 
-This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
+# Start Project
 
-For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
+You need to use npmn -i to install the node modules.
+After thet use npmn dev to open local project
