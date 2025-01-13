@@ -1,6 +1,6 @@
-## Dream City is a project about Brasov City
+## Dream City is a project about Brasov City (Best Citi)
 
 # Start Project
-
-You need to use npmn -i to install the node modules.
-After thet use npmn dev to open local project
+Instal nodeJS from website
+You need to use pnpm install to install the node modules.
+After thet use pnpm dev to open local project
