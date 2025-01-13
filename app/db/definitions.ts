@@ -1,7 +1,14 @@
-export type User = {
+export type MyUser = {
   id: string;
   name: string;
   email: string;
   password: string;
-  type: "admin" | "user";
+  role: "admin" | "user";
+};
+
+export type UsersTable = {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
 };

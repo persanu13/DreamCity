@@ -1,16 +1,13 @@
 import AdminLogo from "@/app/ui/logos/admin-logo";
 import LoginForm from "@/app/ui/auth/login-form";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <main className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
         <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-          <div className="w-32 text-white md:w-36">
-            <h1 className=" text-2xl">Log In</h1>
-          </div>
+          <div className="w-32 text-white md:w-36">Register</div>
         </div>
-        <LoginForm />
       </div>
     </main>
   );

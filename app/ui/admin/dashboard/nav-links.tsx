@@ -6,6 +6,7 @@ import {
   UsersIcon,
   CalendarIcon,
   BuildingLibraryIcon,
+  NewspaperIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,21 +15,26 @@ import clsx from "clsx";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: "Home", href: "/admin", icon: HomeIcon },
+  { name: "Acasa", href: "/admin", icon: HomeIcon },
   {
-    name: "Users",
+    name: "Utilizatori",
     href: "/admin/users",
     icon: UsersIcon,
   },
   {
     name: "Evenimente",
-    href: "/admin/evenimente",
+    href: "/admin/events",
     icon: CalendarIcon,
   },
   {
     name: "Obiective Turistice",
-    href: "/admin/obiective",
+    href: "/admin/attractions",
     icon: BuildingLibraryIcon,
+  },
+  {
+    name: "Stiri",
+    href: "/admin/news",
+    icon: NewspaperIcon,
   },
 ];
 

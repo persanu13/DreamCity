@@ -12,7 +12,7 @@ async function seedUsers() {
       name VARCHAR(255) NOT NULL,
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL,
-      type TEXT NOT NULL CHECK (type IN ('admin', 'user'))
+      role TEXT NOT NULL CHECK (role IN ('admin', 'user'))
     );
   `;
 
@@ -20,8 +20,8 @@ async function seedUsers() {
     users.map(async (user) => {
       const hashedPassword = await bcrypt.hash(user.password, 10);
       return client.sql`
-      INSERT INTO users (id, name, email, password, type)
-      VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.type})
+      INSERT INTO users (id, name, email, password, role)
+      VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.role})
       ON CONFLICT (id) DO NOTHING;
     `;
     })

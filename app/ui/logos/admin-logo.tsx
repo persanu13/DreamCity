@@ -6,7 +6,7 @@ export default function AdminLogo() {
     <div
       className={`${lusitana.className} flex flex-row items-center leading-none text-white gap-1`}
     >
-      <LockClosedIcon className="h-10 w-10" />
+      <LockClosedIcon className="h-8 w-8" />
       <p className="text-[40px]">Admin</p>
     </div>
   );
