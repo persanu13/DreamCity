@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { DeleteUser } from "./buttons";
-import InvoiceStatus from "@/app/ui/invoices/status";
-import { formatDateToLocal, formatCurrency } from "@/app/lib/utils";
 import { getFilteredUsers } from "@/app/db/actions/users";
 import { UsersIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 
@@ -50,7 +48,7 @@ export default async function UsersTable({
                   Email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Tip
+                  Rol
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -71,12 +69,12 @@ export default async function UsersTable({
                   <td className="whitespace-nowrap px-3 py-3">{user.email}</td>
 
                   <td className="whitespace-nowrap px-3 py-3 flex gap-1 items-center">
-                    {user.type == "admin" ? (
+                    {user.role == "admin" ? (
                       <WrenchScrewdriverIcon className="h-6 w-6" />
                     ) : (
                       <UsersIcon className="h-6 w-6" />
                     )}
-                    <p>{user.type}</p>
+                    <p>{user.role}</p>
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

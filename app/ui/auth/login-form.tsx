@@ -10,6 +10,7 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "../components/button";
 import { useActionState } from "react";
 import { authenticate } from "@/app/(auth)/authenticate";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(
@@ -63,9 +64,19 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
+        <Button type="submit" className="mt-4 w-full" aria-disabled={isPending}>
           Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
+        <Link href={"/register"}>
+          <Button
+            type="button"
+            className="mt-4 w-full"
+            aria-disabled={isPending}
+          >
+            Go to register{" "}
+            <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+          </Button>
+        </Link>
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"

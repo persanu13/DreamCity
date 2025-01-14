@@ -1,10 +1,11 @@
 import type { NextAuthConfig } from "next-auth";
-
+import { NextResponse } from "next/server";
 import { MyUser } from "./app/db/definitions";
 
 export const authConfig = {
   pages: {
     signIn: "/login",
+    signOut: "/login",
   },
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
@@ -38,12 +39,12 @@ export const authConfig = {
         if (publicAcces) {
           return true;
         }
-        return Response.redirect(new URL("/login", nextUrl));
+        return NextResponse.redirect(new URL("/login", nextUrl));
       }
       // Acces pentru admin - Acces pe tot site-ul
       if (isAdmin) {
         if (adminNotAcces) {
-          return Response.redirect(new URL("/admin", nextUrl));
+          return NextResponse.redirect(new URL("/admin", nextUrl));
         }
         return true;
       }
@@ -53,12 +54,12 @@ export const authConfig = {
         if (userAcces) {
           return true;
         } else {
-          return Response.redirect(new URL("/user", nextUrl));
+          return NextResponse.redirect(new URL("/user", nextUrl));
         }
       }
 
       // În orice alt caz, redirecționează la /login
-      return Response.redirect(new URL("/login", nextUrl));
+      return NextResponse.redirect(new URL("/login", nextUrl));
     },
   },
   providers: [], // Adaugă aici furnizorii de autentificare
