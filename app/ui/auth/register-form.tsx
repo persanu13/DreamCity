@@ -12,10 +12,24 @@ import { Button } from "../components/button";
 import { useActionState } from "react";
 import { registerUser, State } from "@/app/db/actions/users";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function RegisterForm() {
   const initialState: State = { message: null, errors: {} };
   const [state, formAction] = useActionState(registerUser, initialState);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <form action={formAction} className="space-y-3">
@@ -38,6 +52,8 @@ export default function RegisterForm() {
                 type="text"
                 name="name"
                 placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleInputChange}
                 aria-describedby="name-error"
               />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -64,6 +80,8 @@ export default function RegisterForm() {
                 type="email"
                 name="email"
                 placeholder="Enter your email address"
+                value={formData.email}
+                onChange={handleInputChange}
                 aria-describedby="email-error"
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
