@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import Table from "@/app/ui/admin/events/table";
 import Pagination from "@/app/ui/components/pagination";
 import { getEventsPages } from "@/app/db/actions/events";
+import { CreateEvent } from "@/app/ui/admin/events/buttons";
 
 export default async function Page(props: {
   searchParams?: Promise<{
@@ -22,6 +23,7 @@ export default async function Page(props: {
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Cauta evenimente..." />
+        <CreateEvent></CreateEvent>
       </div>
       <Table query={query} currentPage={currentPage}  />
       <div className="mt-5 flex w-full justify-center">

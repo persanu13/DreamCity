@@ -57,7 +57,7 @@ async function seedEvents() {
     CREATE TABLE IF NOT EXISTS events (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      imgUrl TEXT NOT NULL,
+      imgurl TEXT NOT NULL,
       description TEXT NOT NULL,
       content TEXT NOT NULL,
       date TEXT NOT NULL
@@ -67,7 +67,7 @@ async function seedEvents() {
   const insertedEvents = await Promise.all(
     events.map(async (event) => {
       return client.sql`
-      INSERT INTO events (id, name, imgUrl, description, content, date)
+      INSERT INTO events (id, name, imgurl, description, content, date)
       VALUES (${event.id}, ${event.name}, ${event.imgUrl}, ${event.description}, ${event.content}, ${event.date})
       ON CONFLICT (id) DO NOTHING;
     `;

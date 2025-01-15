@@ -13,19 +13,19 @@ export type UsersTable = {
   role: "admin" | "user";
 };
 
-export type Event = {
+export type MyEvent = {
   id: string;
   name: string;
-  imgUrl: string;
+  imgurl: string;
   description: string;
   content: string;
   date: string;
 };
 
-export type EventTable = {
+export type MyEventTable = {
   id: string;
   name: string;
-  imgUrl: string;
+  imgurl: string;
   description: string;
   date: string;
 };

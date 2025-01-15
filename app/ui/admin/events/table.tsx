@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DeleteEvent } from "./buttons";
+import { DeleteEvent, EditEvent } from "./buttons";
 import { getFilteredEvents } from "@/app/db/actions/events";
 import { UsersIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 
@@ -70,6 +70,11 @@ export default async function EventsTable({
                   <td className="whitespace-nowrap px-3 py-3">{event.description}</td>
                   <td className="whitespace-nowrap px-3 py-3">{event.date}</td>
 
+                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex justify-end gap-3">
+                      <EditEvent id={event.id} />
+                    </div>
+                  </td>
                   
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
