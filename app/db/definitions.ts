@@ -25,7 +25,6 @@ export type MyEvent = {
 export type MyEventTable = {
   id: string;
   name: string;
-  imgurl: string;
   description: string;
   date: string;
 };
@@ -41,7 +40,6 @@ export type Attraction = {
 export type AttractionTable = {
   id: string;
   name: string;
-  imgurl: string;
   description: string;
 };
 
@@ -57,7 +55,6 @@ export type News = {
 export type NewsTable = {
   id: string;
   name: string;
-  imgurl: string;
   description: string;
   date: string;
 };
