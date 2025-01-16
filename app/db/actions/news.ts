@@ -40,6 +40,32 @@ export async function getFilteredNews(query: string, currentPage: number) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
+    const news = await sql<News>`
+      SELECT
+        news.id,
+        news.name,
+        news.imgurl,
+        news.description,
+        news.content,
+        news.date
+      FROM news
+      WHERE
+        news.name ILIKE ${`%${query}%`} OR
+        news.description ILIKE ${`%${query}%`}
+      ORDER BY news.date DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+    return news.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch News.");
+  }
+}
+
+export async function getFilteredNewsTable(query: string, currentPage: number) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
     const news = await sql<NewsTable>`
       SELECT
         news.id,
@@ -71,15 +97,15 @@ export async function getNewsById(id: string) {
         news.date
       FROM news
       WHERE news.id = ${id}
-      LIMIT 1
     `;
 
-    return news.rows[0];
+    return news.rows[0] || null;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch the news.");
+    throw new Error("Failed to fetch the news article.");
   }
 }
+
 
 export async function getNewsPages(query: string) {
   try {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { DeleteNews, EditNews } from "./buttons"; // Update the import to use the news buttons
-import { getFilteredNews } from "@/app/db/actions/news"; // Update to use the correct action for news
+import { getFilteredNewsTable } from "@/app/db/actions/news"; // Update to use the correct action for news
 import { UsersIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 
 export default async function NewsTable({
@@ -10,7 +10,7 @@ export default async function NewsTable({
   query: string;
   currentPage: number;
 }) {
-  const news = await getFilteredNews(query, currentPage); // Use the news data instead of events
+  const news = await getFilteredNewsTable(query, currentPage); // Use the news data instead of events
 
   return (
     <div className="mt-6 flow-root">
