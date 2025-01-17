@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { db } from "@vercel/postgres";
-import { users, events, attractions, news } from "../placeholeder-data";
+import { users, events, attractions, news, attractionsReview } from "../placeholeder-data";
 
 const client = await db.connect();
 
@@ -50,6 +50,33 @@ async function seedAttractions() {
     })
   );
   return insertedAttractions;
+}
+async function seedAttractionsReviews() {
+  // Create the attractions_reviews table
+  await client.sql`
+    CREATE TABLE IF NOT EXISTS attraction_reviews (
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      user_id UUID NOT NULL,  -- Changed to user_id
+      attraction_id UUID NOT NULL,  -- Changed to attraction_id
+      rating INTEGER NOT NULL,
+      content TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id),  -- Updated foreign key to user_id
+      FOREIGN KEY (attraction_id) REFERENCES attractions(id)  -- Updated foreign key to attraction_id
+    );
+  `;
+
+  // Insert the reviews into the attractions_reviews table
+  const insertedAttractionsReviews = await Promise.all(
+    attractionsReview.map(async (review) => {
+      return client.sql`
+        INSERT INTO attraction_reviews (id, user_id, attraction_id, rating, content)
+        VALUES (${review.id}, ${review.user_id}, ${review.attraction_id}, ${review.rating}, ${review.content})
+        ON CONFLICT (id) DO NOTHING;  -- Prevent inserting duplicates
+      `;
+    })
+  );
+
+  return insertedAttractionsReviews;
 }
 
 async function seedEvents() {
@@ -107,6 +134,7 @@ export async function GET() {
     await seedUsers();
     await seedEvents();
     await seedAttractions();
+    await seedAttractionsReviews()
     await seedNews();
     await client.sql`COMMIT`;
 
