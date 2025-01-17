@@ -96,6 +96,23 @@ export async function registerUser(prevState: State, formData: FormData) {
   redirect("/login");
 }
 
+export async function getUserId(name: string, email: string): Promise<string | null> {
+  try {
+    const result = await sql<{ id: string }>`
+      SELECT id FROM users WHERE name = ${name} AND email = ${email} LIMIT 1
+    `;
+
+    if (result.rows.length === 0) {
+      return null; // Return null if no user is found
+    }
+
+    return result.rows[0].id; // Return the user ID
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch user ID.");
+  }
+}
+
 export async function getFilteredUsers(query: string, currentPage: number) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 

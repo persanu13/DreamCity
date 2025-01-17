@@ -6,6 +6,13 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+export type State = {
+  message?: string | null;
+  errors?: {
+    [key: string]: string[];
+  };
+};
+
 // Define Zod schema for validation
 const CreateReviewSchema = z.object({
     user_id: z.string().uuid(),
@@ -30,17 +37,41 @@ export async function getReviewsByAttractionId(attractionId: string): Promise<At
 }
 
 
-export async function deleteReview(reviewId: string): Promise<void> {
+export async function deleteAttractionReview(
+  reviewId: string,
+  prevState: State
+): Promise<State> {
   try {
-    await sql`
+    const result = await sql`
       DELETE FROM attraction_reviews
       WHERE id = ${reviewId}
     `;
+
+    if (result.rowCount === 0) {
+      return {
+        message: "No review found.",
+        errors: {},
+      };
+    }
+
+    // Optional revalidation and redirect
+    revalidatePath(`/user/attractions/${reviewId}`);
+
+    return {
+      message: "Review deleted successfully.",
+      errors: {},
+    };
   } catch (error) {
-    console.error('Failed to delete attraction review:', error);
-    throw new Error('Failed to delete attraction review.');
+    console.error("Database Error:", error);
+    return {
+      message: "Database Error: Failed to delete review.",
+      errors: {
+        db: ["Failed to delete review"],
+      },
+    };
   }
 }
+
 
 
   
