@@ -43,7 +43,7 @@ export default function TownHistoryPage() {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <Image 
-                src="https://www.bizbrasov.ro/wp-content/uploads/2020/09/brasovul-medieval.jpg" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Brasov_1689.jpg/375px-Brasov_1689.jpg" 
                 alt="Ascensiunea orașului medieval" 
                 width={400} 
                 height={300} 
