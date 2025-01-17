@@ -36,7 +36,7 @@ const CreateAttraction = AttractionFormSchema.omit({ id: true });
 
 const UpdateAttraction = AttractionFormSchema.omit({ id: true });
 
-export async function getFilteredAttractions(query: string, currentPage: number) {
+export async function getFilteredAttractionsTable(query: string, currentPage: number) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
@@ -46,6 +46,29 @@ export async function getFilteredAttractions(query: string, currentPage: number)
         attractions.name,
         attractions.description,
         attractions.imgUrl
+      FROM attractions
+      WHERE
+        attractions.name ILIKE ${`%${query}%`}
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+    return attractions.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch Attractions.");
+  }
+}
+
+export async function getFilteredAttractions(query: string, currentPage: number) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const attractions = await sql<Attraction>`
+      SELECT
+        attractions.id,
+        attractions.name,
+        attractions.imgUrl,
+        attractions.description,
+        attractions.content
       FROM attractions
       WHERE
         attractions.name ILIKE ${`%${query}%`}

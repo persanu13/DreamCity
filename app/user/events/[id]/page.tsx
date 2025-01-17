@@ -2,34 +2,34 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { getNewsById } from '@/app/db/actions/news';
+import { getEventById } from '@/app/db/actions/events';
 import Image from 'next/image';
 import Link from 'next/link';
-import { News } from '@/app/db/definitions';
+import { MyEvent } from '@/app/db/definitions';
 import {LoadingSpinner} from '@/app/ui/components/loadingspinner';
 
-export default function NewsArticlePage() {
+export default function EventArticlePage() {
   const { id } = useParams();
   const router = useRouter();
 
-  const [news, setNews] = useState<News | null>(null);
+  const [event, setEvent] = useState<MyEvent | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) return; // Prevent fetching with undefined ID
 
-    async function fetchNews() {
+    async function fetchEvent() {
       setLoading(true);
-      const data = await getNewsById(id as string);
+      const data = await getEventById(id as string);
       if (!data) {
-        router.replace('/404');
+        router.replace('/404'); // Redirect if not found
       } else {
-        setNews(data);
+        setEvent(data);
       }
       setLoading(false);
     }
 
-    fetchNews();
+    fetchEvent();
   }, [id, router]);
 
   if (loading) return <LoadingSpinner/>;
@@ -38,14 +38,14 @@ export default function NewsArticlePage() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <article>
         <header className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">{news?.name}</h1>
-          <time dateTime={news?.date} className="text-gray-600 text-sm">{news?.date}</time>
+          <h1 className="text-3xl font-bold mb-2">{event?.name}</h1>
+          <time dateTime={event?.date} className="text-gray-600 text-sm">{event?.date}</time>
         </header>
 
         <div className="relative w-full h-[400px] mb-8">
           <Image
-            src={news?.imgurl || "/placeholder.svg"}
-            alt={"news?.name"}
+            src={event?.imgurl || "/placeholder.svg"}
+            alt={"event?.name"}
             fill
             className="object-cover rounded-lg"
             priority
@@ -54,15 +54,15 @@ export default function NewsArticlePage() {
 
         <div className="prose max-w-none">
           <p className="whitespace-pre-wrap text-gray-800 leading-relaxed">
-            {news?.content}
+            {event?.content}
           </p>
         </div>
 
         <Link 
-          href="/user/news" 
+          href="/user/events" 
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
         >
-          Înapoi la Știri
+          Înapoi la Evenimente
         </Link>
       </article>
     </div>

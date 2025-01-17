@@ -23,7 +23,7 @@ export function CardBox({ news }: { news: News }) {
           href={`/user/news/${news.id}`} 
           className="text-sm text-blue-600 hover:underline"
         >
-          Read more
+          Citește mai mult
         </Link>
       </div>
     </article>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { DeleteEvent, EditEvent } from "./buttons";
-import { getFilteredEvents } from "@/app/db/actions/events";
+import { getFilteredEventsTable } from "@/app/db/actions/events";
 import { UsersIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 
 export default async function EventsTable({
@@ -10,7 +10,7 @@ export default async function EventsTable({
   query: string;
   currentPage: number;
 }) {
-  const events = await getFilteredEvents(query, currentPage);
+  const events = await getFilteredEventsTable(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">

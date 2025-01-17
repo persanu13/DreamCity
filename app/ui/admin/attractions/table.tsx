@@ -1,5 +1,5 @@
 import { DeleteAttraction, EditAttraction } from "./buttons";
-import { getFilteredAttractions } from "@/app/db/actions/attractions";
+import { getFilteredAttractionsTable } from "@/app/db/actions/attractions";
 
 export default async function AttractionsTable({
   query,
@@ -8,7 +8,7 @@ export default async function AttractionsTable({
   query: string;
   currentPage: number;
 }) {
-  const attractions = await getFilteredAttractions(query, currentPage);
+  const attractions = await getFilteredAttractionsTable(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">

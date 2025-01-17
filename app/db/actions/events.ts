@@ -38,7 +38,7 @@ export type State = {
   
   const UpdateEvent = FormSchema.omit({ id: true});
 
-  export async function getFilteredEvents(query: string, currentPage: number) {
+  export async function getFilteredEventsTable(query: string, currentPage: number) {
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   
     try {
@@ -46,6 +46,30 @@ export type State = {
         SELECT
           events.id,
           events.name,
+          events.description,
+          events.content,
+          events.date
+        FROM events
+        WHERE
+          events.name ILIKE ${`%${query}%`}
+        LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      `;
+      return events.rows;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch Events.");
+    }
+  }
+
+  export async function getFilteredEvents(query: string, currentPage: number) {
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  
+    try {
+      const events = await sql<MyEvent>`
+        SELECT
+          events.id,
+          events.name,
+          events.imgurl,
           events.description,
           events.content,
           events.date
