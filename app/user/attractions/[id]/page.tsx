@@ -7,8 +7,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Attraction, AttractionReview } from '@/app/db/definitions';
 import { getAttractionById } from '@/app/db/actions/attractions';
+
 import { getReviewsByAttractionId, createReview } from '@/app/db/actions/attractionsreviews';
 import { SessionProvider } from "next-auth/react"
+import { LoadingSpinner } from '@/app/ui/components/loadingspinner';
+
 
 const initialState = {
   user_id: '',
@@ -55,7 +58,7 @@ export default function AttractionArticlePage() {
   };
 
   if (!attraction) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />; // Show loading while fetching attraction
   }
 
   return (
