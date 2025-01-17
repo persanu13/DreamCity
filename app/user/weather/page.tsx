@@ -1,9 +1,10 @@
-import { lusitana } from "@/app/ui/fonts";
+import WeatherDisplay from '@/app/ui/user/weather/weatherdisplay'
 
-export default async function Page() {
+export default function WeatherPage() {
   return (
-    <main>
-      <h1 className={`${lusitana.className} mb-4 text-3xl font-bold`}>Weather</h1>
+    <main className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Prognoză Meteo</h1>
+      <WeatherDisplay />
     </main>
-  );
+  )
 }

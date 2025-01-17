@@ -81,6 +81,28 @@ export async function getFilteredAttractions(query: string, currentPage: number)
   }
 }
 
+export async function getCountAttractions(query: string, count: number) {
+
+  try {
+    const attractions = await sql<Attraction>`
+      SELECT
+        attractions.id,
+        attractions.name,
+        attractions.imgUrl,
+        attractions.description,
+        attractions.content
+      FROM attractions
+      WHERE
+        attractions.name ILIKE ${`%${query}%`}
+      LIMIT ${count}
+    `;
+    return attractions.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch Attractions.");
+  }
+}
+
 export async function getAttractionById(id: string) {
   try {
     const attraction = await sql<Attraction>`

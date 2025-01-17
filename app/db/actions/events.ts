@@ -85,6 +85,29 @@ export type State = {
     }
   }
 
+  export async function getCountEvents(query: string, count: number) {
+  
+    try {
+      const events = await sql<MyEvent>`
+        SELECT
+          events.id,
+          events.name,
+          events.imgurl,
+          events.description,
+          events.content,
+          events.date
+        FROM events
+        WHERE
+          events.name ILIKE ${`%${query}%`}
+        LIMIT ${count}
+      `;
+      return events.rows;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch Events.");
+    }
+  }
+
   export async function getEventById(id: string) {
     try {
       const event = await sql<MyEvent>`

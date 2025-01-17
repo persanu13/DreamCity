@@ -62,6 +62,31 @@ export async function getFilteredNews(query: string, currentPage: number) {
   }
 }
 
+export async function getCountNews(query: string, count: number) {
+
+  try {
+    const news = await sql<News>`
+      SELECT
+        news.id,
+        news.name,
+        news.imgurl,
+        news.description,
+        news.content,
+        news.date
+      FROM news
+      WHERE
+        news.name ILIKE ${`%${query}%`} OR
+        news.description ILIKE ${`%${query}%`}
+      ORDER BY news.date DESC
+      LIMIT ${count}
+    `;
+    return news.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch News.");
+  }
+}
+
 export async function getFilteredNewsTable(query: string, currentPage: number) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
