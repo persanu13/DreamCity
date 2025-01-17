@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Attraction } from '@/app/db/definitions';
 import { getAttractionById } from '@/app/db/actions/attractions';
-import {LoadingSpinner} from '@/app/ui/components/loadingspinner';
+import { LoadingSpinner } from '@/app/ui/components/loadingspinner';
 
 function AttractionArticlePage() {
   const { id } = useParams(); // Correct way to get the dynamic route param
@@ -27,7 +27,7 @@ function AttractionArticlePage() {
   }, [id]);
 
   if (!attraction) {
-    return <LoadingSpinner/>; // Show loading while fetching attraction
+    return <LoadingSpinner />; // Show loading while fetching attraction
   }
 
   return (
@@ -47,7 +47,7 @@ function AttractionArticlePage() {
           />
         </div>
 
-        <div className="prose max-w-none">
+        <div className="prose max-w-none mb-8">
           <p className="whitespace-pre-wrap text-gray-800 leading-relaxed">
             {attraction.content}
           </p>

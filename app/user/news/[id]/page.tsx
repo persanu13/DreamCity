@@ -52,7 +52,7 @@ export default function NewsArticlePage() {
           />
         </div>
 
-        <div className="prose max-w-none">
+        <div className="prose max-w-none mb-8">
           <p className="whitespace-pre-wrap text-gray-800 leading-relaxed">
             {news?.content}
           </p>
