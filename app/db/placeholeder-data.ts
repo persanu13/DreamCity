@@ -95,7 +95,22 @@ export const attractions = [
     content: "Conduceți pe unul dintre cele mai frumoase drumuri din lume, cu priveliști impresionante și opriri memorabile."
   }
 ];
-
+export const attractionsReview = [
+  {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "user_id": "410544b2-4001-4271-9865-fec4b6a6442a",
+    "attraction_id": "226429ac-3650-45b8-bdd3-45180a0acad3",
+    "rating": 4,
+    "content": "This is a placeholder review admin.",
+  },
+  {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d473",
+    "user_id": "410544b2-4001-4271-9865-fec4b6a6442a",
+    "attraction_id": "226429ac-3650-45b8-bdd3-45180a0acad3",
+    "rating": 5,
+    "content": "This is a placeholder review user.",
+  },
+]
 export const news = [
   {
     id: "7c39fb87-3afd-47ea-bb4f-3a36d81b39f6",

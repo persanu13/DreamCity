@@ -20,6 +20,7 @@ export type MyEvent = {
   description: string;
   content: string;
   date: string;
+  reviews?: EventReview[]; // Relationship to EventReview
 };
 
 export type MyEventTable = {
@@ -35,6 +36,7 @@ export type Attraction = {
   imgurl: string;
   description: string;
   content: string;
+  reviews?: AttractionReview[]; // Relationship to AttractionReview
 };
 
 export type AttractionTable = {
@@ -57,4 +59,22 @@ export type NewsTable = {
   name: string;
   description: string;
   date: string;
+};
+
+export type EventReview = {
+  id: string;
+  user_id: string;
+  event_id: string;
+  rating: number;
+  content: string;
+  user_name?: { name: string };
+};
+
+export type AttractionReview = {
+  id: string;
+  user_id: string;
+  attraction_id: string;
+  rating: number;
+  content: string;
+  user_name?: { name: string };
 };
