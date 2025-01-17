@@ -33,7 +33,7 @@ export default function AttractionsPage() {
 
   return (
     <div className="px-4 py-6 max-w-7xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6">Atracții</h1>
+      <h1 className="text-3xl font-bold mb-6">Atracții</h1>
       <div className="mb-6">
         <Search placeholder="Search attractions..." />
       </div>
