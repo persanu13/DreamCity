@@ -95,7 +95,7 @@ export const attractions = [
     content: "Conduceți pe unul dintre cele mai frumoase drumuri din lume, cu priveliști impresionante și opriri memorabile."
   }
 ];
-export const attractionsReview = [
+export const attractionsReviews = [
   {
     "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
     "user_id": "410544b2-4001-4271-9865-fec4b6a6442a",
@@ -109,6 +109,22 @@ export const attractionsReview = [
     "attraction_id": "226429ac-3650-45b8-bdd3-45180a0acad3",
     "rating": 5,
     "content": "This is a placeholder review user.",
+  },
+]
+export const eventsReviews = [
+  {
+    "id": "f47ac10b-58cc-4372-a967-0e02b2c3d379",
+    "user_id": "410544b2-4001-4271-9865-fec4b6a6442a",
+    "event_id": "43ee3b4c-aa66-4905-8a75-ef07e5b08a87",
+    "rating": 5,
+    "content": "Fain!1!",
+  },
+  {
+    "id": "f47ac10b-58cc-4372-a167-0e02b2c3d273",
+    "user_id": "410544b2-4001-4271-9865-fec4b6a6442a",
+    "event_id": "43ee3b4c-aa66-4905-8a75-ef07e5b08a87",
+    "rating": 1,
+    "content": "Naspa D:",
   },
 ]
 export const news = [

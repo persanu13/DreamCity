@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { db } from "@vercel/postgres";
-import { users, events, attractions, news, attractionsReview } from "../placeholeder-data";
+import { users, events, attractions, news, attractionsReviews, eventsReviews } from "../placeholeder-data";
 
 const client = await db.connect();
 
@@ -67,7 +67,7 @@ async function seedAttractionsReviews() {
 
   // Insert the reviews into the attractions_reviews table
   const insertedAttractionsReviews = await Promise.all(
-    attractionsReview.map(async (review) => {
+    attractionsReviews.map(async (review) => {
       return client.sql`
         INSERT INTO attraction_reviews (id, user_id, attraction_id, rating, content)
         VALUES (${review.id}, ${review.user_id}, ${review.attraction_id}, ${review.rating}, ${review.content})
@@ -78,6 +78,35 @@ async function seedAttractionsReviews() {
 
   return insertedAttractionsReviews;
 }
+
+async function seedEventsReviews() {
+  // Create the event_reviews table
+  await client.sql`
+    CREATE TABLE IF NOT EXISTS event_reviews (
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      user_id UUID NOT NULL,
+      event_id UUID NOT NULL,
+      rating INTEGER NOT NULL,
+      content TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (event_id) REFERENCES events(id)
+    );
+  `;
+
+  // Insert the reviews into the event_reviews table
+  const insertedEventsReviews = await Promise.all(
+    eventsReviews.map(async (review) => {
+      return client.sql`
+        INSERT INTO event_reviews (id, user_id, event_id, rating, content)
+        VALUES (${review.id}, ${review.user_id}, ${review.event_id}, ${review.rating}, ${review.content})
+        ON CONFLICT (id) DO NOTHING;
+      `;
+    })
+  );
+
+  return insertedEventsReviews;
+}
+
 
 async function seedEvents() {
   await client.sql`
@@ -133,6 +162,7 @@ export async function GET() {
     await client.sql`BEGIN`;
     await seedUsers();
     await seedEvents();
+    await seedEventsReviews();
     await seedAttractions();
     await seedAttractionsReviews()
     await seedNews();
