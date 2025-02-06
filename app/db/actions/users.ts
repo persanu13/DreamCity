@@ -96,7 +96,10 @@ export async function registerUser(prevState: State, formData: FormData) {
   redirect("/login");
 }
 
-export async function getUserId(name: string, email: string): Promise<string | null> {
+export async function getUserId(
+  name: string,
+  email: string
+): Promise<string | null> {
   try {
     const result = await sql<{ id: string }>`
       SELECT id FROM users WHERE name = ${name} AND email = ${email} LIMIT 1

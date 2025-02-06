@@ -9,9 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Main content */}
-      <div className="flex-grow p-6 overflow-y-auto">
-        {children}
-      </div>
+      <div className="flex-grow p-6 overflow-y-auto">{children}</div>
     </div>
   );
 }

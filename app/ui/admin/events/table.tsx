@@ -67,7 +67,12 @@ export default async function EventsTable({
                       <p>{event.name}</p>
                     </div>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">{event.description}</td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {" "}
+                    {event.description.length > 60
+                      ? `${event.description.substring(0, 60)}...`
+                      : event.description}
+                  </td>
                   <td className="whitespace-nowrap px-3 py-3">{event.date}</td>
 
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
@@ -75,8 +80,7 @@ export default async function EventsTable({
                       <EditEvent id={event.id} />
                       <DeleteEvent id={event.id} />
                     </div>
-                  </td>  
-                  
+                  </td>
                 </tr>
               ))}
             </tbody>
