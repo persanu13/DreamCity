@@ -67,7 +67,12 @@ export default async function NewsTable({
                       <p>{newsItem.name}</p>
                     </div>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">{newsItem.description}</td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {" "}
+                    {newsItem.description.length > 60
+                      ? `${newsItem.description.substring(0, 60)}...`
+                      : newsItem.description}
+                  </td>
                   <td className="whitespace-nowrap px-3 py-3">{newsItem.date}</td>
 
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
